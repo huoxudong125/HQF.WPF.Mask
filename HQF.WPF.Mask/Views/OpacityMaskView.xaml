@@ -65,11 +65,25 @@
                Source="{StaticResource TestImage}">
             <Image.OpacityMask>
                 <VisualBrush>
-                    <VisualBrush.Visual>
-                        <Canvas Grid.Column="4" x:Name="MaskCanvas" Width="10" Height="10">
-                            <Ellipse Canvas.Top="0" Canvas.Left="0" Fill="Black" Width="10" Height="10" />
-                            <Rectangle Canvas.Top="3" Canvas.Left="0" Fill="Black" Width="10" Height="5" />
-                        </Canvas>
+                    <VisualBrush.Visual >
+                        <ItemsControl ItemsSource="{Binding Path=Rectangles}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemContainerStyle>
+                                <Style TargetType="ContentPresenter">
+                                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Rectangle Fill="Black" Width="{Binding Width}" Height="{Binding Height}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </VisualBrush.Visual>
                 </VisualBrush>
             </Image.OpacityMask>
